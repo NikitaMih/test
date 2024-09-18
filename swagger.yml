@@ -1,0 +1,196 @@
+openapi: 3.0.1
+info:
+  title: new bux
+  description: ''
+  version: 0.0.1
+tags:
+  - name: payments
+paths:
+  /bux/ajaxv2/payments.php:
+    get:
+      tags:
+        - payments
+      summary: Получение списка платежей
+      operationId: getPayments
+      responses:
+        '404':
+          description: Not found
+          content: {}
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+      x-codegen-request-body-name: body
+    put:
+      tags:
+        - payments
+      summary: Обновление платежа
+      operationId: updatePayment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+        required: true
+      responses:
+        '404':
+          description: Not found
+          content: {}
+      x-codegen-request-body-name: body
+    post:
+      tags:
+        - payments
+      summary: Создание платежа
+      operationId: addPayment
+      requestBody:
+        description: ID не нужен
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+        required: true
+      responses:
+        '405':
+          description: Invalid input
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - payments
+      summary: Удаление платежа по ID
+      operationId: deletePayment
+      responses:
+        '404':
+          description: Не найден платеж
+          content: {}
+      x-codegen-request-body-name: body
+  /bux/ajaxv2/managers.php:
+    get:
+      tags:
+        - managers
+      summary: Получение списка менеджеров
+      operationId: getManagers
+      responses:
+        '403':
+          description: Not allowed
+          content: {}
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Manager'
+      x-codegen-request-body-name: body
+
+  /bux/ajaxv2/projects.php:
+    get:
+      tags:
+        - projects
+      summary: Получение списка сайтов и их проектов
+      operationId: getProjects
+      responses:
+        '403':
+          description: Not allowed
+          content: {}
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    Manager:
+      type: array
+      items:
+        type: string
+    Project:
+      type: array
+      items:
+        type: object
+        properties:
+            sitename:
+              type: array
+              items:
+                type: string
+
+    ManagerPercent:
+      type: object
+      properties:
+        id_payment_percent:
+          type: integer
+          format: int64
+        name:
+          type: string
+        manager:
+          type: string
+        total:
+          type: integer
+          format: int64
+        id_payment_wait: 
+          type: integer
+          format: int64
+    DeletePayment:
+      required:
+        - id_payment_wait
+      type: object
+      properties:
+        id_payment_wait:
+          type: integer
+          format: int64
+    Payment:
+      type: object
+      properties:
+        id_payment_wait:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+        total_free:
+          type: integer
+          format: int64
+        total_minus:
+          type: integer
+          format: int64
+        category:
+          type: string
+          example: ''
+        site:
+          type: string
+          example: ''
+        project:
+          type: string
+          example: ''
+        comment:
+          type: string
+          example: ''
+        from:
+          type: string
+          example: ''
+        contragent:
+          type: string
+          example: ''
+        status:
+          type: integer
+          format: int64
+          example: 0
+        oldProject:
+          type: integer
+          format: int64
+          example: 0
+        daysProject:
+          type: integer
+          format: int64
+          example: 0
+        daysType:
+          type: integer
+          format: int64
+          example: 0
+        percents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManagerPercent'

@@ -1,0 +1,66 @@
+.title {
+    margin: 20px 0 10px;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    color: #212529;
+}
+.arrow {
+    margin-right: 5px;
+}
+.payment_list__row {
+    align-items: center;
+    padding: 15px 0px;
+    border-top: 1px solid #DEE2E6;
+}
+.payment_list__row_good {
+    background-color:#E1FFE1;
+}
+
+.payment_list__title {
+    font-size: 1.25rem;
+}
+
+.red_text {
+    color: red;
+}
+
+.green_text {
+    color: green;
+}
+.payment_smaller_text {
+    font-size: 13px;
+}
+.payment_list__controls {
+    width:16px;
+    cursor:pointer;
+    transition: 0.5s all;
+    background: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 0px;
+}
+.payment_list__controls:hover {
+    background: rgb(226, 226, 226);
+}
+.purple_text {
+    color: #BB0DD8;
+}
+
+.payment__date {
+    display: block;
+    font-size: 10px;
+    color: #999;
+}
+
+@media(max-width: 768px) {
+    .payment_list__controls__container {
+        display: flex;
+        gap: 1rem;
+    }
+}
